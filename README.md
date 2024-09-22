@@ -26,7 +26,7 @@ The dataset contains several features used to predict the house sale price, incl
 7. **TotalBsmtSF**: Total square footage of the basement.
 8. **SalePrice**: Sale price of the house (target variable).
 
-![Dataset Overview](https://media.istockphoto.com/id/1567429058/photo/landscaping-on-middleclass-homes-aerial-neighborhood-fresh-cut-lawns.jpg?s=2048x2048&w=is&k=20&c=-RSlRMjm0s6vhmHdNOBoVS-J4nuJWdmaSHXK1_ErpVU=)
+![Dataset Overview](https://plus.unsplash.com/premium_photo-1661915661139-5b6a4e4a6fcc?q=80&w=1934&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 
 ## ⚙️ Installation
 To get the project up and running on your local machine, follow the instructions below:
