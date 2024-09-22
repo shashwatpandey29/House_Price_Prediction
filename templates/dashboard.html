@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Heading Styling */
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Buttons */
+        input[type="submit"],
+        button {
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Reset button */
+        button {
+            background-color: #6c757d;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #5a6268;
+        }
+
+        /* Prediction Styling */
+        .prediction {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .prediction h2 {
+            font-size: 1.75rem;
+            color: #28a745;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .prediction h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>House Price Prediction</h1>
+        <form id="predictionForm" method="POST" onsubmit="return validateForm()">
+            <label for="MSSubClass">MSSubClass:</label>
+            <input type="text" id="MSSubClass" name="MSSubClass" placeholder="Enter house class (e.g., 20)">
+
+            <label for="LotArea">LotArea (in sq ft):</label>
+            <input type="text" id="LotArea" name="LotArea" placeholder="Enter lot area (e.g., 9600)">
+
+            <label for="OverallCond">Overall Condition (1-10):</label>
+            <input type="text" id="OverallCond" name="OverallCond" placeholder="Enter overall condition">
+
+            <label for="YearBuilt">Year Built:</label>
+            <input type="text" id="YearBuilt" name="YearBuilt" placeholder="Enter year built (e.g., 1995)">
+
+            <label for="YearRemodAdd">Year Remodeled:</label>
+            <input type="text" id="YearRemodAdd" name="YearRemodAdd" placeholder="Enter year remodeled (e.g., 2005)">
+
+            <label for="BsmtFinSF2">Basement Finished SF:</label>
+            <input type="text" id="BsmtFinSF2" name="BsmtFinSF2" placeholder="Enter basement finished area (e.g., 0)">
+
+            <label for="TotalBsmtSF">Total Basement SF:</label>
+            <input type="text" id="TotalBsmtSF" name="TotalBsmtSF" placeholder="Enter total basement area (e.g., 1200)">
+
+            <input type="submit" value="Predict">
+            <button type="button" onclick="resetForm()">Reset</button>
+        </form>
+
+        {% if prediction %}
+        <div class="prediction">
+            <h2>Predicted Sale Price: ₹{{ "{:,.2f}".format(prediction) }}</h2>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Form validation
+        function validateForm() {
+            const requiredFields = ['MSSubClass', 'LotArea', 'OverallCond', 'YearBuilt', 'YearRemodAdd', 'BsmtFinSF2', 'TotalBsmtSF'];
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                const value = document.getElementById(field).value.trim();
+                if (!value) {
+                    alert(`Please fill in the ${field} field.`);
+                    isValid = false;
+                    return false;
+                }
+                if (isNaN(value)) {
+                    alert(`${field} should be a valid number.`);
+                    isValid = false;
+                    return false;
+                }
+            });
+
+            return isValid;
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('predictionForm').reset();
+        }
+    </script>
+</body>
+</html>
